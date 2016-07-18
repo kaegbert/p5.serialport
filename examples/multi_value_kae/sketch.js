@@ -62,6 +62,6 @@ function gotData() {
 function draw() {
   background(255,255,255);
   fill(0,0,0);
-  text("sensor value: " + textXpos, textXpos, 30);
-
+  var result = textXpos;
+  text(result, textXpos, textXpos, 30,30);
 }
