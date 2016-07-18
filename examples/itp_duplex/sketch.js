@@ -1,5 +1,8 @@
 var serial;          // variable to hold an instance of the serialport library
 var portName = '/dev/cu.usbmodemFA131'; // fill in your serial port name here
+var a = new Audio('audio/e.mp3');
+var b = new Audio('audio/a.mp3');
+
 
 function setup() {
  createCanvas(640, 480);          // make canvas
@@ -22,6 +25,19 @@ function draw() {
  background(0);               // black background
  fill(circleColor);           // fill depends on the button
  ellipse(locH, locV, 50, 50); // draw the circle
+ if (locH > 300) {
+    noStroke();
+    fill(100, 40, 70);
+    rect(150, 150, 10, 10);
+    a.play();
+  }
+
+  if (locV > 300) {
+     noStroke();
+     fill(100, 240, 70);
+     rect(350, 150, 10, 10);
+     b.play();
+   }
 }
 
 // get the list of ports:
@@ -59,11 +75,24 @@ function serialEvent() {
       var sensors = split(inString, ','); // split the string on the commas
       if (sensors.length > 2) { // if there are three elements
         locH = map(sensors[0], 70, 100, 0, -150);
-        println(locH); // element 0 is the locH
+        // if locH > 150 {
+        //   a.play();
+        // }
+        // println(locH); // element 0 is the locH
+        println(locV);
+
         locV = map(sensors[1], 70, 100, 0, -150); // element 1 is the locV
         circleColor = 255 - (sensors[2] * 100);      // element 2 is the button
       }
     }
     serial.write('x'); // send a byte requesting more serial data
+  }
+}
+
+function keyPressed() {
+  if (key == 'A') {
+    a.play();
+    // background(200, 100, 0);
+
   }
 }
