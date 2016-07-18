@@ -28,14 +28,16 @@ function draw() {
  if (locH > 300) {
     noStroke();
     fill(100, 40, 70);
-    rect(150, 150, 10, 10);
+    rect(150, 150, 40, 40);
+    text("locH is greater than 300",100,100,100,100);
     a.play();
   }
 
-  if (locV > 300) {
+  if (locV > 320) {
      noStroke();
      fill(100, 240, 70);
-     rect(350, 150, 10, 10);
+     rect(350, 150, 40, 40);
+     text("locV is greater than 320",300,100,100,100);
      b.play();
    }
 }
@@ -73,7 +75,7 @@ function serialEvent() {
   if (inString.length > 0) {
     if (inString !== 'hello') {           // if you get hello, ignore it
       var sensors = split(inString, ','); // split the string on the commas
-      if (sensors.length > 2) { // if there are three elements
+      if (sensors.length > 6) { // if there are three elements
         locH = map(sensors[0], 70, 100, 0, -150);
         // if locH > 150 {
         //   a.play();
